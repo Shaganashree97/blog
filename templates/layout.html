@@ -20,8 +20,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
   <div class="container">
     <a class="navbar-brand" href="{% url 'index' %}">
-      <img src="{% static 'img/logo.png' %}" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-      djcms
+      <!-- <img src="{% static 'img/logo.png' %}" alt="Logo" width="30" height="30" class="d-inline-block align-text-top"> -->
+      BlogApp
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -133,7 +133,7 @@
 
   
 <br><br><br><br><br><br>
-<!-- Footer -->
+<!-- Footer 
 <section>
   <footer class="text-center text-white">
     {% if request.user.is_anonymous %}
@@ -146,12 +146,15 @@
       </section>
     </div>
     {% endif %}
+    
     <div class="text-center p-3 copyright-text">
       © 2023 Copyright:
       <a class="text-white" href="/">djcms</a>
     </div>
+    
   </footer>
 </section>
+-->
 
 <!-- Javascripts -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
