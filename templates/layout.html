@@ -12,7 +12,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <link href="{% static 'css/index.css' %}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  <title>{% block title %}{% endblock %} | djcms</title>
+  <title>{% block title %}{% endblock %} | BlogApp</title>
 </head>
 <body>
 
@@ -20,8 +20,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
   <div class="container">
     <a class="navbar-brand" href="{% url 'index' %}">
-      <img src="{% static 'img/logo.png' %}" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-      djcms
+      <!-- <img src="{% static 'img/logo.png' %}" alt="Logo" width="30" height="30" class="d-inline-block align-text-top"> -->
+      BlogApp
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -40,12 +40,14 @@
             Popular
           </a>
         </li>
+        <!--
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="{% url 'trendings' %}">
             <i class="bi bi-fire"></i>
             Trendings
           </a>
         </li>
+        -->
         <form class="d-flex" role="search" action="{% url 'search' %}" method="get">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query">
           <button class="btn btn-success" type="submit">
@@ -53,6 +55,12 @@
           </button>
         </form>
         {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{% url 'accounts:profile' %}">
+            <i class="bi bi-person"></i>
+            Profile
+          </a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="{% url 'bookmark' %}">
             <i class="bi bi-bookmarks"></i>
@@ -133,7 +141,7 @@
 
   
 <br><br><br><br><br><br>
-<!-- Footer -->
+<!-- Footer 
 <section>
   <footer class="text-center text-white">
     {% if request.user.is_anonymous %}
@@ -146,12 +154,15 @@
       </section>
     </div>
     {% endif %}
+    
     <div class="text-center p-3 copyright-text">
       © 2023 Copyright:
       <a class="text-white" href="/">djcms</a>
     </div>
+    
   </footer>
 </section>
+-->
 
 <!-- Javascripts -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
