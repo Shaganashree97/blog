@@ -6,6 +6,8 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from .models import User
+from .forms import UserUpdateForm, PasswordUpdateForm
+from django.contrib.auth import update_session_auth_hash
 
 
 class Login(View):
@@ -34,6 +36,40 @@ class Logout(View):
         messages.info(request, "Logged out")
         return redirect("accounts:login")
 
+@method_decorator(login_required, name="dispatch")
+class Profile(View):
+    def get(self, request):
+        user_form = UserUpdateForm(instance=request.user)
+        password_form = PasswordUpdateForm(user=request.user)
+        context = {
+            'user_form': user_form,
+            'password_form': password_form
+        }
+        return render(request, 'accounts/profile.html', context)
+
+    def post(self, request):
+        if 'update_profile' in request.POST:
+            user_form = UserUpdateForm(request.POST, instance=request.user)
+            password_form = PasswordUpdateForm(user=request.user)
+            if user_form.is_valid():
+                user_form.save()
+                messages.success(request, 'Your profile has been updated!')
+                return redirect('accounts:profile')
+        elif 'change_password' in request.POST:
+            user_form = UserUpdateForm(instance=request.user)
+            password_form = PasswordUpdateForm(user=request.user, data=request.POST)
+            if password_form.is_valid():
+                user = password_form.save()
+                update_session_auth_hash(request, user)  # Important!
+                messages.success(request, 'Your password has been updated!')
+                return redirect('accounts:profile')
+
+        context = {
+            'user_form': user_form,
+            'password_form': password_form
+        }
+        return render(request, 'accounts/profile.html', context)
+    
 class Register(View):
     def get(self, request):
         if request.user.is_authenticated:
