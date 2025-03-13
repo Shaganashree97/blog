@@ -3,41 +3,47 @@
 {% block title %}Index{% endblock %}
 
 {% block body %}
-<div class="container mt-5 mb-5">
-  <div class="row mb-1">
+<div class="container mt-5 mb-5" style="max-width: 1200px;">
+
+  <!-- Recent Posts Section -->
+  <div class="row mb-4 align-items-center">
     <div class="col-6">
-      <h2>Recent Posts</h2>
+      <h2 style="font-size: 26px; font-weight: bold; color: #222; margin-bottom: 0;">🔥 Recent Posts</h2>
     </div>
-    <div class="col-6">
-      <a class="btn btn-primary float-end" href="{% url 'latest' %}" role="button">
-        <i class="bi bi-list-check"></i>
-        View All
+    <div class="col-6 text-end">
+      <a class="btn" href="{% url 'latest' %}" role="button"
+         style="background: #007bff; color: #fff; padding: 10px 16px; font-size: 14px; font-weight: 600; border-radius: 6px; transition: background 0.3s;">
+        <i class="bi bi-list-check" style="margin-right: 5px;"></i> View All
       </a>
     </div>
   </div>
+
   <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for blog in latest %}
       {% include 'card.html' with blog=blog %}
     {% endfor %}
   </div>
 
-  <br><hr>
+  <br><hr style="border: none; height: 1px; background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)); margin: 40px 0;">
 
-  <div class="row mb-1">
+  <!-- Popular Posts Section -->
+  <div class="row mb-4 align-items-center">
     <div class="col-6">
-      <h2>Popular Posts</h2>
+      <h2 style="font-size: 26px; font-weight: bold; color: #222; margin-bottom: 0;">🌟 Popular Posts</h2>
     </div>
-    <div class="col-6">
-      <a class="btn btn-primary float-end" href="{% url 'popular' %}" role="button">
-        <i class="bi bi-list-check"></i>
-        View All
+    <div class="col-6 text-end">
+      <a class="btn" href="{% url 'popular' %}" role="button"
+         style="background: #007bff; color: #fff; padding: 10px 16px; font-size: 14px; font-weight: 600; border-radius: 6px; transition: background 0.3s;">
+        <i class="bi bi-list-check" style="margin-right: 5px;"></i> View All
       </a>
     </div>
   </div>
+
   <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for blog in popular %}
       {% include 'card.html' with blog=blog %}
     {% endfor %}
   </div>
+
 </div>
 {% endblock %}
