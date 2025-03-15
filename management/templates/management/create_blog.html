@@ -3,54 +3,71 @@
 {% block title %}Add Blog{% endblock %}
 
 {% block body %}
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5" style="max-width: 1000px; background: #fff; padding: 25px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); border-radius: 8px;">
   <form method="post" action="{% url 'manage:create_blog' %}" enctype="multipart/form-data">
     {% csrf_token %}
-    <h1 class="text-center mb-3">
-      Add Blog
-    </h1>
+
+    <h1 class="text-center mb-4" style="color: #333; font-weight: 600;">Add Blog</h1>
+
+    <!-- Blog Title -->
     <div class="mb-3">
-      <label for="title" class="form-label">Title:</label>
-      <input type="text" class="form-control" id="title" placeholder="Title" name="title" required autofocus>
+      <label for="title" class="form-label fw-bold" style="color: #000;">Title:</label>
+      <input type="text" class="form-control" id="title" placeholder="Enter blog title" name="title" required style="border-radius: 5px;">
     </div>
+
+    <!-- Blog Description -->
     <div class="mb-3">
-      <label for="desc" class="form-label">Description:</label>
-      <textarea class="form-control" placeholder="Type description here" id="desc" style="height: 100px" name="desc"></textarea>
+      <label for="desc" class="form-label fw-bold" style="color: #000;">Description:</label>
+      <textarea class="form-control" id="desc" placeholder="Write a short description..." style="height: 120px; border-radius: 5px;" name="desc"></textarea>
     </div>
-    <br>
-    {{ form.media }}
-    {{ form.as_p }}
+
+    <!-- Text Editor (Django Form Media) -->
     <div class="mb-3">
-      <label for="thumbnail" class="form-label">Thumbnail:</label>
-      <input class="form-control" type="file" id="thumbnail" name="thumbnail" accept="image/*" required>
+      <label class="form-label fw-bold" style="color: #000;">Content:</label>
+      <div style="border: 1px solid #ddd; padding: 10px; border-radius: 5px; background: #f9f9f9;">
+        {{ form.media }}
+        {{ form.as_p }}
+      </div>
     </div>
+
+    <!-- Thumbnail Upload -->
     <div class="mb-3">
-      <label for="categories" class="form-label">Categories:</label>
-      <select id="categories" class="form-select" multiple aria-label="multiple select example" name="categories" required>
-        <option disabled value=''>Select categories</option>
+      <label for="thumbnail" class="form-label fw-bold" style="color: #000;">Thumbnail:</label>
+      <input class="form-control" type="file" id="thumbnail" name="thumbnail" accept="image/*" required style="border-radius: 5px;">
+    </div>
+
+    <!-- Category Selection -->
+    <div class="mb-3">
+      <label for="categories" class="form-label fw-bold" style="color: #000;">Categories:</label>
+      <select id="categories" class="form-select" multiple name="categories" required style="border-radius: 5px;">
+        <option disabled value="" style="color: #000;">Select categories</option>
         {% for category in categories %}
         <option value="{{ category.id }}">{{ category.category }}</option>
         {% endfor %}
       </select>
-      <small>Not have category? <a class="text-decoration-none" href="{% url 'manage:create_category' %}">Create</a></small>
+      <small class="d-block mt-1" style="color: #000;">Don't see a category? <a class="text-decoration-none" href="{% url 'manage:create_category' %}" style="color: #007bff;">Create one</a></small>
     </div>
-    <br>
-    <div class="row">
-      <div class="col-4">
-        <p>Status:</p>
-      </div>
-      <div class="form-check col-4">
-        <input class="form-check-input" type="radio" name="status" value="0" id="draft">
-        <label class="form-check-label" for="draft">Draft</label>
-      </div>
-      <div class="form-check col-4">
-        <input class="form-check-input" type="radio" name="status" value="1" id="publish" checked="checked">
-        <label class="form-check-label" for="publish">Publish</label>
+
+    <!-- Blog Status -->
+    <div class="mb-3">
+      <label class="form-label fw-bold" style="color: #000;">Status:</label>
+      <div class="d-flex align-items-center gap-3">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="status" value="0" id="draft">
+          <label class="form-check-label" for="draft" style="color: #000;" >Draft</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="status" value="1" id="publish" checked>
+          <label class="form-check-label" for="publish" style="color: #000;">Publish</label>
+        </div>
       </div>
     </div>
-    <div class="row float-end">
-      <button type="submit" class="btn btn-outline-success">Publish</button>
+
+    <!-- Submit Button -->
+    <div class="text-end">
+      <button type="submit" class="btn btn-success px-4 py-2 fw-bold" style="border-radius: 5px;">Save</button>
     </div>
+
   </form>
 </div>
 {% endblock %}

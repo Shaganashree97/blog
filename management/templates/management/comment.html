@@ -1,40 +1,43 @@
 {% extends 'layout.html' %}
 
-{% block titlw %}comment{% endblock %}
+{% block title %}Manage Comments{% endblock %}
 
 {% block body %}
 <div class="container mt-5">
-  <div class="row mb-3">
-    <h1 class="text-center">
-      Manage Comments
-    </h1>
+
+  <!-- Page Title -->
+  <div class="row mb-4">
+    <h1 class="text-center fw-bold" style="color: #fff;">Manage Comments</h1>
   </div>
+
+  <!-- Comments Table -->
   <div class="row">
-    <table class="table table-hover">
+    <table class="table table-hover" 
+           style="border-collapse: collapse; width: 100%; background: #fff; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
       <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">ID</th>
-          <th scope="col">Comment</th>
-          <th scope="col">Creator</th>
-          <th scope="col">Blog ID</th>
-          <th scope="col">Blog Title</td>
-          <th scope="col">Actions</td>
+        <tr style="background: linear-gradient(to right, #007bff, #0056b3); color: white; font-weight: 600; text-align: center;">
+          <th scope="col" style="padding: 12px; border-right: 1px solid #ddd;">#</th>
+          <th scope="col" style="padding: 12px; border-right: 1px solid #ddd;">ID</th>
+          <th scope="col" style="padding: 12px; border-right: 1px solid #ddd;">Comment</th>
+          <th scope="col" style="padding: 12px; border-right: 1px solid #ddd;">Creator</th>
+          <th scope="col" style="padding: 12px; border-right: 1px solid #ddd;">Blog ID</th>
+          <th scope="col" style="padding: 12px; border-right: 1px solid #ddd;">Blog Title</th>
+          <th scope="col" style="padding: 12px;">Actions</th>
         </tr>
       </thead>
       <tbody class="table-group-divider">
         {% for comment in comments %}
-        <tr>
-          <td scope="row">{{ forloop.counter }}</td>
-          <td>{{ comment.id }}</td>
-          <td>{{ comment.comment|truncatechars:30 }}</td>
-          <td>{{ comment.creator.username }}</td>
-          <td>{{ comment.blog.id }}</td>
-          <td>{{ comment.blog.title|truncatechars:30 }}</td>
-          <td>
-            <a class="btn btn-danger" href="{% url 'manage:delete_comment' comment.id %}" role="button">
-              <i class="bi bi-trash3"></i>
-              Delete
+        <tr style="text-align: center; border-bottom: 1px solid #ddd;">
+          <th scope="row" style="padding: 12px; font-weight: 600;">{{ forloop.counter }}</th>
+          <td style="padding: 12px; color: #555;">{{ comment.id }}</td>
+          <td style="padding: 12px; font-weight: 500;">{{ comment.comment|truncatechars:30 }}</td>
+          <td style="padding: 12px; color: #666;">{{ comment.creator.username }}</td>
+          <td style="padding: 12px; font-weight: 500;">{{ comment.blog.id }}</td>
+          <td style="padding: 12px; color: #555;">{{ comment.blog.title|truncatechars:30 }}</td>
+          <td style="padding: 12px;">
+            <a class="btn" href="{% url 'manage:delete_comment' comment.id %}" role="button"
+               style="background: #dc3545; color: white; padding: 6px 12px; font-size: 14px; border-radius: 5px; font-weight: 600; transition: 0.3s;">
+              <i class="bi bi-trash3"></i> Delete
             </a>
           </td>
         </tr>
@@ -42,5 +45,6 @@
       </tbody>
     </table>
   </div>
+
 </div>
 {% endblock %}

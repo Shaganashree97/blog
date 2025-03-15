@@ -3,18 +3,101 @@
 
 {% block body %}
 <div class="container mt-5">
-    <h2>Profile</h2>
-    <form method="POST" action="{% url 'accounts:profile' %}">
-        {% csrf_token %}
-        {{ user_form.as_p }}
-        <button type="submit" name="update_profile" class="btn btn-primary">Update Profile</button>
-    </form>
-    <hr>
-    <h2>Change Password</h2>
-    <form method="POST" action="{% url 'accounts:profile' %}">
-        {% csrf_token %}
-        {{ password_form.as_p }}
-        <button type="submit" name="change_password" class="btn btn-primary">Change Password</button>
-    </form>
+    <div class="row justify-content-center">
+        <div class="col-md-5 mb-4">  <!-- Adjusted column width for better alignment -->
+            
+            <!-- Profile Details Card -->
+            <div class="card shadow-sm border-0 rounded-4" 
+                 style="box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+                <div class="card-body p-4">
+                    <h2 class="fw-bold text-center mb-4" style="font-size: 22px; font-weight: 700; color: #222;">User Profile</h2>
+                    
+                    <form method="POST" action="{% url 'accounts:profile' %}">
+                        {% csrf_token %}
+                        <div class="mb-3" style="color: #333;">
+                            {% for field in user_form %}
+                                <div class="form-group" style="margin-bottom: 15px;">
+                                    <label style="font-weight: 600; color: #333; margin-bottom: 5px; display: block;">{{ field.label_tag }}</label>
+                                    {{ field }}
+                                    <style>
+                                        input {
+                                            width: 100%;
+                                            padding: 10px;
+                                            border: 1px solid #ccc;
+                                            border-radius: 5px;
+                                            font-size: 16px;
+                                        }
+                                    </style>
+                                    {% if field.errors %}
+                                        <div class="text-danger" style="font-size: 13px; margin-top: 5px; background: rgba(255, 0, 0, 0.1); padding: 5px 10px; border-radius: 4px;">
+                                            {% for error in field.errors %}
+                                                <p style="margin: 0;">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <button type="submit" name="update_profile" class="btn w-100 fw-semibold py-2"
+                                style="background: #007bff; color: #fff; border-radius: 6px; padding: 10px 16px; font-size: 16px; font-weight: 600; transition: 0.3s; border: none;">
+                            Update Profile
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Change Password Card -->
+        <div class="col-md-5 mb-4"> <!-- Adjusted column width for better alignment -->
+            <div class="card shadow-sm border-0 rounded-4" 
+                 style="box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+                <div class="card-body p-4">
+                    <h2 class="fw-bold text-center mb-4" style="font-size: 22px; font-weight: 700; color: #222;">Change Password</h2>
+                    
+                    <form method="POST" action="{% url 'accounts:profile' %}">
+                        {% csrf_token %}
+                        <div class="mb-3" style="color: #333;">
+                            {% for field in password_form %}
+                                <div class="form-group" style="margin-bottom: 15px;">
+                                    <label style="font-weight: 600; color: #333; margin-bottom: 5px; display: block;">{{ field.label_tag }}</label>
+                                    {{ field }}
+                                    <style>
+                                        input {
+                                            width: 100%;
+                                            padding: 10px;
+                                            border: 1px solid #ccc;
+                                            border-radius: 5px;
+                                            font-size: 16px;
+                                        }
+                                    </style>
+                                    {% if field.errors %}
+                                        <div class="text-danger" style="font-size: 13px; margin-top: 5px; background: rgba(255, 0, 0, 0.1); padding: 5px 10px; border-radius: 4px;">
+                                            {% for error in field.errors %}
+                                                <p style="margin: 0;">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <button type="submit" name="change_password" class="btn w-100 fw-semibold py-2"
+                                style="background: #007bff; color: #fff; border-radius: 6px; padding: 10px 16px; font-size: 16px; font-weight: 600; transition: 0.3s; border: none;">
+                            Change Password
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
+
+<!-- Prevent auto-focusing on any input field -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.activeElement.blur();
+    });
+</script>
+
 {% endblock %}

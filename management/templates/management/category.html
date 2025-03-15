@@ -1,44 +1,51 @@
 {% extends 'layout.html' %}
 
-{% block titlw %}Category{% endblock %}
+{% block title %}Category{% endblock %}
 
 {% block body %}
 <div class="container mt-5">
-  <div class="row mb-3">
-    <h1 class="text-center">
-      Manage Categories
-    </h1>
+  
+  <!-- Page Title -->
+  <div class="row mb-4">
+    <h1 class="text-center fw-bold" style="color: #fff;">Manage Categories</h1>
   </div>
-  <a role="button" class="btn btn-secondary btn-sm round-btn" href='{% url 'manage:create_category' %}'>
-    <i class="bi bi-plus-lg"></i>
-    Create Category
-  </a>
+
+  <!-- Create Category Button -->
+  <div class="mb-3 text-end">
+    <a role="button" class="btn btn-primary fw-semibold px-3 py-2" href='{% url "manage:create_category" %}' 
+       style="border-radius: 6px; transition: 0.3s;">
+      <i class="bi bi-plus-lg"></i> Create Category
+    </a>
+  </div>
+
+  <!-- Categories Table -->
   <div class="row">
-    <table class="table table-hover">
+    <table class="table table-hover" 
+           style="border-collapse: collapse; width: 100%; background: #fff; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
       <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">ID</th>
-          <th scope="col">Category</th>
-          <th scope="col">Desc</th>
-          <th scope="col">Actions</td>
+        <tr style="background: linear-gradient(to right, #007bff, #0056b3); color: white; font-weight: 600; text-align: center;">
+          <th scope="col" style="padding: 12px; border-right: 1px solid #ddd;">#</th>
+          <th scope="col" style="padding: 12px; border-right: 1px solid #ddd;">ID</th>
+          <th scope="col" style="padding: 12px; border-right: 1px solid #ddd;">Category</th>
+          <th scope="col" style="padding: 12px; border-right: 1px solid #ddd;">Desc</th>
+          <th scope="col" style="padding: 12px;">Actions</th>
         </tr>
       </thead>
       <tbody class="table-group-divider">
         {% for category in categories %}
-        <tr>
-          <th scope="row">{{ forloop.counter }}</th>
-          <th>{{ category.id }}</th>
-          <td>{{ category.category|truncatechars:30 }}</td>
-          <td>{{ category.desc|truncatechars:50 }}</td>
-          <td>
-            <a class="btn btn-warning" href="{% url 'manage:edit_category' category.id %}" role="button">
-              <i class="bi bi-pencil-square"></i>
-              Edit
+        <tr style="text-align: center; border-bottom: 1px solid #ddd;">
+          <th scope="row" style="padding: 12px; font-weight: 600;">{{ forloop.counter }}</th>
+          <td style="padding: 12px; color: #555;">{{ category.id }}</td>
+          <td style="padding: 12px; font-weight: 500;">{{ category.category|truncatechars:30 }}</td>
+          <td style="padding: 12px; color: #666;">{{ category.desc|truncatechars:50 }}</td>
+          <td style="padding: 12px;">
+            <a class="btn" href="{% url 'manage:edit_category' category.id %}" role="button"
+               style="background: #ffc107; color: #222; padding: 6px 12px; font-size: 14px; border-radius: 5px; font-weight: 600; transition: 0.3s;">
+              <i class="bi bi-pencil-square"></i> Edit
             </a>
-            <a class="btn btn-danger" href="{% url 'manage:delete_category' category.id %}" role="button">
-              <i class="bi bi-trash3"></i>
-              Delete
+            <a class="btn" href="{% url 'manage:delete_category' category.id %}" role="button"
+               style="background: #dc3545; color: white; padding: 6px 12px; font-size: 14px; border-radius: 5px; font-weight: 600; transition: 0.3s;">
+              <i class="bi bi-trash3"></i> Delete
             </a>
           </td>
         </tr>

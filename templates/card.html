@@ -1,26 +1,37 @@
 <div class="col">
-  <div class="card h-100">
+  <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden"
+       style="transition: transform 0.3s ease-in-out; background: #fff;">
+    
     <div class="ratio ratio-16x9">
-      <img src="{{ blog.thumbnail.url }}" class="card-img-top" alt="blog's thumbnail">
+      <img src="{{ blog.thumbnail.url }}" class="card-img-top" alt="blog's thumbnail"
+           style="object-fit: cover;">
     </div>
+    
     <div class="card-body">
-      <h5 class="card-title">{{ blog.title }}</h5>
-      <p class="card-text">{{ blog.desc|truncatechars:100 }}</p>
+      <h5 class="card-title fw-bold text-dark">{{ blog.title }}</h5>
+      <p class="card-text text-muted" style="font-size: 15px; line-height: 1.5;">
+        {{ blog.desc|truncatechars:100 }}
+      </p>
     </div>
-    <div class="row justify-content-evenly mb-1">
-      <div class="col-4">
-        <p class="text-muted float-start">
-          <i class="bi bi-eye"></i>
-          {{ blog.views }}
+
+    <div class="row justify-content-between px-3 mb-2">
+      <div class="col-auto">
+        <p class="text-muted mb-0">
+          <i class="bi bi-eye"></i> {{ blog.views }}
         </p>
       </div>
-      <div class="col-6">
-        <p class="text-muted float-end">
-          <i class="bi bi-clock-history"></i>
-          {{ blog.published_on|timesince }}
+      <div class="col-auto">
+        <p class="text-muted mb-0">
+          <i class="bi bi-clock-history"></i> {{ blog.published_on|timesince }}
         </p>
       </div>
     </div>
-    <a class="btn btn-outline-primary w-100" href="{% url 'blogs:blog' blog.slug %}" role="button">Read More -></a>
+
+    <a class="btn w-100 fw-semibold py-2"
+       href="{% url 'blogs:blog' blog.slug %}" role="button"
+       style="background: #007bff; color: #fff; border-radius: 0 0 12px 12px; transition: background 0.3s;">
+      Read More →
+    </a>
+    
   </div>
 </div>
