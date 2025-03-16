@@ -1,3 +1,4 @@
+from urllib import request
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.db.models import Q
@@ -10,7 +11,8 @@ class Index(View):
     def get(self, request):
         latest_blogs = Blog.objects.filter(is_active=True, is_published=True)[:6]
         popular = Blog.objects.filter(is_active=True, is_published=True).order_by("-views")[:3]
-        return render(request, "index.html", {"latest": latest_blogs, "popular": popular})
+        categories = Category.objects.all()
+        return render(request, "index.html", {"latest": latest_blogs, "popular": popular,"categories":categories})
 
 class Trendings(ListView):
     model = Blog

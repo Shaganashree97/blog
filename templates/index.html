@@ -5,6 +5,20 @@
 {% block body %}
 <div class="container mt-5 mb-5" style="max-width: 1200px;">
 
+  <!-- Categories Section -->
+  <div class="col-6">
+    <h2 style="font-size: 18px; font-weight: bold; color: #fff;">Categories</h2>
+  </div>
+  <div class="row mb-5">
+    {% for category in categories.all %}
+      {% if category.is_active %}
+        <div class="col-auto">  <!-- Change from 'col' to 'col-auto' to automatically adjust width -->
+          <a type="button" href="{% url 'get_category' category.slug %}" class="btn btn-primary btn-sm">{{ category.category }}</a>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
   <!-- Recent Posts Section -->
   <div class="row mb-4 align-items-center">
     <div class="col-6">
@@ -47,4 +61,6 @@
   </div>
 
 </div>
+
+
 {% endblock %}
